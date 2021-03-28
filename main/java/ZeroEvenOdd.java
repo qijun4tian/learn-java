@@ -37,103 +37,99 @@ import java.util.function.IntConsumer;
  */
 public class ZeroEvenOdd {
     private int n;
+
     private Lock lock;
-    private Condition zeroCondition;
-    private Condition evenCondition;
-    private Condition oddCondition;
+
+    private Condition condition1;
+
+    private Condition condition2;
+
+    private Condition condition3;
+
+
     private volatile boolean evenFlag = false;
+
     private volatile boolean oddFlag = false;
-    private volatile boolean zeroFlag = false;
+
+
 
     public ZeroEvenOdd(int n) {
+        lock = new ReentrantLock();
         this.n = n;
-        this.lock = new ReentrantLock();
-        zeroCondition = lock.newCondition();
-        evenCondition = lock.newCondition();
-        oddCondition = lock.newCondition();
-
+        this.condition1 = lock.newCondition();
+        this.condition2 = lock.newCondition();
+        this.condition3 = lock.newCondition();
     }
 
     // printNumber.accept(x) outputs "x", where x is an integer.
     public void zero(IntConsumer printNumber) throws InterruptedException {
-        for(int i =1; i <= n; i++){
+        for (int i = 1; i <= n; i++) {
+            boolean isEven = i % 2 == 0;
+            //System.out.println("flag = " + flag);
             try {
-                boolean isEven = i % 2 == 0;
-                lock.tryLock();
-                printNumber.accept(i);
-                if(isEven){
-                    evenFlag = true;
-                    evenCondition.signalAll();
-                }else {
-                    oddFlag = true;
-                    oddCondition.signalAll();
+                lock.lock();
+                while (evenFlag || oddFlag) {
+                    condition3.await();
                 }
-                zeroCondition.await();
-            }finally {
+                printNumber.accept(0);
+                // 奇数
+                if(!isEven) {
+                    oddFlag = true;
+                    condition2.signalAll();
+                }else {
+                    evenFlag = true;
+                    //System.out.println(11111);
+                    condition1.signalAll();
+                }
+            } finally {
                 lock.unlock();
             }
-
         }
     }
 
     /*偶数*/
     public void even(IntConsumer printNumber) throws InterruptedException {
-        for(int i= 2; i<=n; i += 2 ){
-            try {
-                lock.tryLock();
-                while (!evenFlag){
-                    evenCondition.await();
+        for (int i = 2; i <= n; i= i+2) {
+            if(i%2 == 0){
+                try {
+                    lock.lock();
+                    //System.out.println(1111112);
+                    while (!evenFlag) {
+                        //System.out.println(1111111);
+                        condition1.await();
+                    }
+                    printNumber.accept(i);
+                    evenFlag = false;
+                    //System.out.println("even =" + i);
+                    condition3.signalAll();
+                } finally {
+                    lock.unlock();
                 }
-                printNumber.accept(i);
-                evenFlag = false;
-                zeroCondition.signalAll();
-            }finally {
-                lock.unlock();
             }
-        }
 
+        }
     }
     /*奇数*/
     public void odd(IntConsumer printNumber) throws InterruptedException {
-        for(int i =1; i<=n; i += 2){
-            try {
-                lock.tryLock();
-                while (!oddFlag){
-                    oddCondition.await();
+        for (int i = 1; i <= n; i= i+2) {
+            if(i%2 != 0){
+                try {
+                    lock.lock();
+                    //System.out.println(2222221);
+                    while (!oddFlag) {
+                        //System.out.println(2222222);
+                        condition2.await();
+                    }
+                    printNumber.accept(i);
+                    //System.out.println("odd =" + i);
+                    oddFlag = false;
+                    condition3.signalAll();
+                } finally {
+                    lock.unlock();
                 }
-                printNumber.accept(i);
-                oddFlag = false;
-                zeroCondition.signalAll();
-            }finally {
-                lock.unlock();
             }
+
         }
     }
 
-    public static void main(String[] args) {
-        ZeroEvenOdd zeroEvenOdd = new ZeroEvenOdd(5);
-        IntConsumer intConsumer = System.out::print;
-        new Thread(()-> {
-            try {
-                zeroEvenOdd.zero(intConsumer);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
-        new Thread(()->{
-            try {
-                zeroEvenOdd.even(intConsumer);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }}).start();
-        new Thread(()->{
-            try {
-                zeroEvenOdd.odd(intConsumer);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
-
-
-    }
 }
