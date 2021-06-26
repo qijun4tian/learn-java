@@ -6,3 +6,4 @@ classes/
 *.classes
 **/build
 **/mybatis-gernator.xml
+out
