@@ -2,6 +2,7 @@ package tree;
 
 public class BinarySearchTreeToGreaterSumtree {
 
+
     int sum = 0;
 
     public TreeNode bstToGst(TreeNode root){
