@@ -1,18 +1,6 @@
 package tree;
 
-import sort.linkedlistsort.ListNode;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public class BinarySearchTreeToGreaterSumtree {
-
-    class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode(int x) { val = x; }
-    }
 
     int sum = 0;
 
