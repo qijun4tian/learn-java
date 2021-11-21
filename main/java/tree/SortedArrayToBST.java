@@ -1,5 +1,7 @@
 package tree;
 
+import java.beans.beancontext.BeanContext;
+
 /**
  *
  *
@@ -18,8 +20,22 @@ package tree;
  */
 public class SortedArrayToBST {
     public TreeNode sortedArrayToBST(int[] nums) {
-        TreeNode treeNode = new TreeNode(1);
-        return treeNode;
+        if(nums.length == 0){
+            return null;
+        }
+        return sortedArrayToBST1(nums, 0,nums.length -1);
+
+    }
+
+    public TreeNode sortedArrayToBST1(int[] nums,int begin, int end) {
+        if(begin > end){
+            return null;
+        }
+        int mid = (begin + end) >> 1;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.left = sortedArrayToBST1(nums,begin,mid-1);
+        root.right = sortedArrayToBST1(nums,mid+1,end);
+        return root;
     }
 
 }
