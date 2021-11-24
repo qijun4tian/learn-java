@@ -15,8 +15,21 @@ public class 字符串中的第一个唯一字符 {
         Map<Character,Integer> map = new HashMap<>();
         boolean isUnique = false;
         for (int i = 0; i < chars.length; i++) {
+            map.compute(chars[i],(key,value)->{
+                if(value == null){
+                    return 1;
+                }else {
+                    return value +1;
+                }
 
+            });
         }
+        for (int i = 0; i < chars.length; i++) {
+            if(map.get(chars[i]) == 1){
+                return i;
+            }
+        }
+        return -1;
 
     }
 }
