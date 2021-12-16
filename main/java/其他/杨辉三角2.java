@@ -1,5 +1,7 @@
 package 其他;
 
+import com.sun.javafx.scene.control.behavior.TwoLevelFocusBehavior;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +13,12 @@ import java.util.List;
 public class 杨辉三角2 {
 
     public static List<Integer> getRow(int rowIndex) {
-
+        int last = 0;
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < rowIndex + 1; i++) {
-            result.add(getN(rowIndex + 1, i));
+            int tow = getN(rowIndex, i);
+            result.add(tow + last);
+            last = tow;
         }
 
         return result;
@@ -23,6 +27,10 @@ public class 杨辉三角2 {
 
 
     public static Integer getN(int rowIndex, int i) {
+        System.out.println("rowIndex=" + rowIndex + "i=" + i);
+        if (rowIndex < 0 || i > rowIndex) {
+            return 0;
+        }
         if (i == -1) {
             return 0;
         }
@@ -36,7 +44,7 @@ public class 杨辉三角2 {
     }
 
     public static void main(String[] args) {
-        List<Integer> row = getRow(4);
+        List<Integer> row = getRow(0);
 
         System.out.println(111);
 
