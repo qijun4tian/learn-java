@@ -49,5 +49,11 @@ public class myPow {
     public static void main(String[] args) {
         System.out.println(Integer.MIN_VALUE);
         System.out.println(myPow(2.0, -2147483648));
+
+        double a = 1.0d;
+        double b = 1.00d;
+        System.out.println(a == b);
     }
+
+
 }
