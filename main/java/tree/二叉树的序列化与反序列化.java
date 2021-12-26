@@ -15,7 +15,7 @@ public class 二叉树的序列化与反序列化 {
 
 
     // Encodes a tree to a single string.
-    public String serialize(TreeNode root) {
+    public static String serialize(TreeNode root) {
         if (root == null) {
             return "";
         }
@@ -47,9 +47,10 @@ public class 二叉树的序列化与反序列化 {
                     }
                 }
             }
+            System.out.println(String.join(",", s));
 
             if (isAllNull) {
-                s = s.subList(0, s.size() - (stack.size() - lastNotNull));
+                s = s.subList(0, s.size() - (stack.size() - 1 - lastNotNull));
                 break;
             }
             stack = temp;
@@ -59,7 +60,7 @@ public class 二叉树的序列化与反序列化 {
     }
 
     // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
+    public static TreeNode deserialize(String data) {
         if (data == null || data.length() == 0) {
             return null;
         }
@@ -77,21 +78,31 @@ public class 二叉树的序列化与反序列化 {
                     treeNodes.add(treeNode.left);
                 }
                 if ((i * 2 + 2) < length) {
-                    treeNode.right = buildNode(split[i * 2 + 1]);
+                    treeNode.right = buildNode(split[i * 2 + 2]);
                     treeNodes.add(treeNode.right);
                 }
+            } else {
+                i--;
             }
         }
         return head;
 
     }
 
-    public TreeNode buildNode(String s) {
+    public static TreeNode buildNode(String s) {
         if ("null".equals(s)) {
             return null;
         } else {
             return new TreeNode(Integer.parseInt(s));
         }
+
+    }
+
+    public static void main(String[] args) {
+        String s = "1,2,3,null,null,4,5,6,7";
+        TreeNode deserialize = deserialize(s);
+        System.out.println(serialize(deserialize));
+        System.out.println("1");
 
     }
 }
