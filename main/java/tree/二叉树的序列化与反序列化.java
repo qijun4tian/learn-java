@@ -69,20 +69,20 @@ public class 二叉树的序列化与反序列化 {
         TreeNode head = new TreeNode(Integer.parseInt(split[0]));
         List<TreeNode> treeNodes = new ArrayList<>();
         treeNodes.add(head);
+        int k = 0;
         for (int i = 0; i < length; i++) {
             TreeNode treeNode = treeNodes.get(i);
             if (treeNode != null) {
-                if ((i * 2 + 1) < length) {
+                if ((k * 2 + 1) < length) {
 
-                    treeNode.left = buildNode(split[i * 2 + 1]);
+                    treeNode.left = buildNode(split[k * 2 + 1]);
                     treeNodes.add(treeNode.left);
                 }
-                if ((i * 2 + 2) < length) {
-                    treeNode.right = buildNode(split[i * 2 + 2]);
+                if ((k * 2 + 2) < length) {
+                    treeNode.right = buildNode(split[k * 2 + 2]);
                     treeNodes.add(treeNode.right);
                 }
-            } else {
-                i--;
+                k++;
             }
         }
         return head;
