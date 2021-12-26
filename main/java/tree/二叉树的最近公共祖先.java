@@ -46,7 +46,6 @@ public class 二叉树的最近公共祖先 {
             return;
         }
         map.put(node, last);
-
         if (map.containsKey(p) && map.containsKey(q)) {
             return;
         }
