@@ -1,6 +1,4 @@
-package 队列;
-
-import sun.management.counter.perf.PerfInstrumentation;
+package 队列和广度搜索;
 
 /**
  * @Author:qijun

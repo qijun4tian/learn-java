@@ -1,4 +1,4 @@
-package 队列;
+package 队列和广度搜索;
 
 /**
  * @Author:qijun
