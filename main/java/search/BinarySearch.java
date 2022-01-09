@@ -1,5 +1,8 @@
 package search;
 
+/**
+ * 二分查找
+ */
 public class BinarySearch {
 
     public int search(int a[],int value){
@@ -11,8 +14,7 @@ public class BinarySearch {
             middle = start + (end -start)/2;
             if(a[middle] == value){
                 return middle;
-            }
-            else if(a[middle] < value){
+            } else if(a[middle] < value){
                 start = middle +1;
             }else {
                 end = middle -1;
