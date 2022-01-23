@@ -7,7 +7,8 @@ import java.util.LinkedList;
 
 /**
  * @author:qijun
- * @Description
+ * @Description https://leetcode-cn.com/leetbook/read/queue-stack/ga4o2/
+ * 不需要使用动态规划
  * @Date 14:37 2022/1/22
  */
 public class 目标和 {
