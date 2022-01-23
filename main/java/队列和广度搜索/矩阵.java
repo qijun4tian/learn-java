@@ -57,6 +57,9 @@ public class 矩阵 {
                     temp4 = getLeastStep(result, i, j - 1, m, n, mat, v) + 1;
                 }
                 result[i][j] = Math.min(Math.min(Math.min(temp1, temp2), temp3), temp4);
+                if (result[i][j] == 10000) {
+                    result[i][j] = -1;
+                }
 
             }
         }
@@ -79,14 +82,14 @@ public class 矩阵 {
                 if (mat[i][j] == 0) {
                     result[i][j] = 0;
                 } else {
-                    result[i][j] = bfs(i, j, mat, m, n);
+                    bfs(result, i, j, mat, m, n);
                 }
             }
         }
         return result;
     }
 
-    private Integer bfs(int i, int j, int[][] mat, int m, int n) {
+    private Integer bfs(int[][] result, int i, int j, int[][] mat, int m, int n) {
         Deque<List<Integer>> deque = new LinkedList<>();
         int min = -1;
         int[][] visited = new int[m][n];
@@ -117,8 +120,36 @@ public class 矩阵 {
                 }
             }
         }
+
         return 0;
 
+    }
+
+    class keyValue {
+        int i;
+
+        public keyValue(int i, int j) {
+            this.i = i;
+            this.j = j;
+        }
+
+        public int getI() {
+            return i;
+        }
+
+        public void setI(int i) {
+            this.i = i;
+        }
+
+        public int getJ() {
+            return j;
+        }
+
+        public void setJ(int j) {
+            this.j = j;
+        }
+
+        int j;
 
     }
     //[[0],[1]]
