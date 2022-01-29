@@ -90,7 +90,7 @@ public class 矩阵 {
     //}
 
 
-    public static int[][] updateMatrix(int[][] mat) {
+    public static int[][] updateMatrix1(int[][] mat) {
         int m = mat.length;
         int n = mat[0].length;
         int[][] result = new int[m][n];
@@ -188,41 +188,54 @@ public class 矩阵 {
     }
 
 
-    class Solution {
-        static int[][] dirs = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
-
-        public int[][] updateMatrix(int[][] matrix) {
-            int m = matrix.length, n = matrix[0].length;
-            int[][] dist = new int[m][n];
-            boolean[][] seen = new boolean[m][n];
-            Queue<int[]> queue = new LinkedList<int[]>();
-            // 将所有的 0 添加进初始队列中
-            for (int i = 0; i < m; ++i) {
-                for (int j = 0; j < n; ++j) {
-                    if (matrix[i][j] == 0) {
-                        queue.offer(new int[]{i, j});
-                        seen[i][j] = true;
-                    }
+    public int[][] updateMatrix(int[][] mat) {
+        int m = mat.length;
+        int n = mat[0].length;
+        int[][] result = new int[m][n];
+        boolean[][] visited = new boolean[m][n];
+        Deque<int[]> deque = new LinkedList<>();
+        for (int i = 0; i < m; i++) {
+            for (int i1 = 0; i1 < n; i1++) {
+                if (mat[i][i1] == 0) {
+                    result[i][i1] = 0;
+                    visited[i][i1] = true;
+                    deque.add(new int[]{i, i1});
                 }
             }
-
-            // 广度优先搜索
-            while (!queue.isEmpty()) {
-                int[] cell = queue.poll();
-                int i = cell[0], j = cell[1];
-                for (int d = 0; d < 4; ++d) {
-                    int ni = i + dirs[d][0];
-                    int nj = j + dirs[d][1];
-                    if (ni >= 0 && ni < m && nj >= 0 && nj < n && !seen[ni][nj]) {
-                        dist[ni][nj] = dist[i][j] + 1;
-                        queue.offer(new int[]{ni, nj});
-                        seen[ni][nj] = true;
-                    }
-                }
-            }
-
-            return dist;
         }
+        while (!deque.isEmpty()) {
+            int size = deque.size();
+            for (int i = 0; i < size; i++) {
+                int[] pop = deque.pop();
+                int tempM = pop[0];
+                int tempN = pop[1];
+                if (tempM - 1 >= 0 && !visited[tempM - 1][tempN]) {
+                    result[tempM - 1][tempN] = result[tempM][tempN] + 1;
+                    visited[tempM - 1][tempN] = true;
+                    deque.add(new int[]{tempM - 1, tempN});
+                }
+
+                if (tempM + 1 < m && !visited[tempM + 1][tempN]) {
+                    result[tempM + 1][tempN] = result[tempM][tempN] + 1;
+                    visited[tempM + 1][tempN] = true;
+                    deque.add(new int[]{tempM + 1, tempN});
+                }
+                if (tempN - 1 >= 0 && !visited[tempM][tempN - 1]) {
+                    result[tempM][tempN - 1] = result[tempM][tempN] + 1;
+                    visited[tempM][tempN - 1] = true;
+                    deque.add(new int[]{tempM, tempN - 1});
+                }
+
+                if (tempN + 1 < n && !visited[tempM][tempN + 1]) {
+                    result[tempM][tempN + 1] = result[tempM][tempN] + 1;
+                    visited[tempM][tempN + 1] = true;
+                    deque.add(new int[]{tempM, tempN + 1});
+                }
+
+            }
+        }
+        return result;
+
     }
 
 
