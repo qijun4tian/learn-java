@@ -4,6 +4,10 @@ import java.util.Deque;
 import java.util.LinkedList;
 
 public class MyStack {
+    /*使用队列模拟栈，循环出队列，同时把出队的元素加入队尾，最后一个元素直接出队
+    * 则是栈的pop,只是返回值则是top
+    *
+    */
 
     private Deque<Integer> d1;
 
