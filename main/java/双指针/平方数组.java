@@ -33,6 +33,8 @@ public class 平方数组 {
 
         int begin1 = result;
         int begin2 = result-1;
+
+
         int k = 0;
         while (begin1 < nums.length  && begin2 >= 0){
             if(nums[begin1] > Math.abs(nums[begin2])){
