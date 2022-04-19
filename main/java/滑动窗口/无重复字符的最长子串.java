@@ -66,7 +66,7 @@ public class 无重复字符的最长子串 {
             int begin = -1;
             int end = -1;
             int k = 0;
-            for (int j = 0; j < n; j++) {
+            for (int j = 0; j < n && k < length; j++) {
                 if (board[i][j] == ' ' || board[i][j] == word.charAt(k)) {
                     k++;
                     if (begin == -1) {
@@ -95,16 +95,24 @@ public class 无重复字符的最长子串 {
             }
         }
         for (int j = 0; j < n; j++) {
+            int k = 0;
             int begin = -1;
             int end = -1;
-            int k = 0;
+
             for (int i = 0; i < m; i++) {
-                if (board[i][j] == ' ' || board[i][j] == word.charAt(k)) {
+                k = 0;
+                begin = -1;
+                end = -1;
+                while ((board[i][j] == ' ' || board[i][j] == word.charAt(k)) && k < length) {
+                    i++;
                     k++;
                     if (begin == -1) {
                         begin = i;
                     }
                     end = i;
+                    if (k == length - 1) {
+
+                    }
                 }
             }
             if (k == word.length() && end - begin == word.length() - 1) {
@@ -132,13 +140,9 @@ public class 无重复字符的最长子串 {
     }
 
     public static void main(String[] args) {
-        char[][] chars = {
-                {'#', ' ', '#'}, {
-                ' ', ' ', '#'
-        }, {
-                '#', 'c', ' '
-        }};
-        String word = "abc";
+        char[][] chars = {{' '}, {'#'}, {'o'}, {' '}, {'t'}, {'m'}, {'o'}, {' '}, {'#'}, {' '}};
+        String word =
+                "octmor";
 
         System.out.println(placeWordInCrossword(chars, word));
 
