@@ -1,7 +1,5 @@
 package 回文;
 
-import javax.xml.stream.FactoryConfigurationError;
-
 /**
  * https://leetcode-cn.com/problems/longest-palindrome/
  *
@@ -33,4 +31,20 @@ public class 最长回文串 {
     public static void main(String[] args) {
         longestPalindrome("abccccdd");
     }
+
+
+    public int longestPalindrome1(String s) {
+        int a[] = new int[128];
+        for (int i = 0; i < s.length(); i++) {
+            a[s.charAt(i)] += 1;
+
+        }
+        int length = 0;
+        for (int i = 0; i < 128; i++) {
+            length = length + (a[i] % 2 == 0 ? a[i] : (a[i] - 1));
+        }
+        return length == s.length() ? length : length + 1;
+
+    }
+
 }
