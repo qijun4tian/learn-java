@@ -67,31 +67,35 @@ public class 无重复字符的最长子串 {
             int end = -1;
             int k = 0;
             for (int j = 0; j < n && k < length; j++) {
-                if (board[i][j] == ' ' || board[i][j] == word.charAt(k)) {
-                    k++;
+                k = 0;
+                begin = -1;
+                end = -1;
+                while (j< n  && k < length && (board[i][j] == ' ' || board[i][j] == word.charAt(k))){
                     if (begin == -1) {
                         begin = j;
                     }
                     end = j;
-                }
-            }
-            if (k == word.length() && end - begin == word.length() - 1) {
-                if (begin == 0) {
-                    if (end == n - 1) {
-                        return true;
-                    } else if (board[i][end + 1] == '#') {
-                        return true;
+                    if(k == length -1){
+                        if (begin == 0) {
+                            if (end == n - 1) {
+                                return true;
+                            } else if (board[i][end + 1] == '#') {
+                                return true;
+                            }
+
+                        } else if (board[i][begin - 1] == '#') {
+                            if (end == n - 1) {
+                                return true;
+                            } else if (board[i][end + 1] == '#') {
+                                return true;
+                            }
+
+                        }
+
                     }
-
-                } else if (board[i][begin - 1] == '#') {
-                    if (end == n - 1) {
-                        return true;
-                    } else if (board[i][end + 1] == '#') {
-                        return true;
-                    }
-
+                    j++;
+                    k++;
                 }
-
             }
         }
         for (int j = 0; j < n; j++) {
@@ -103,36 +107,33 @@ public class 无重复字符的最长子串 {
                 k = 0;
                 begin = -1;
                 end = -1;
-                while ((board[i][j] == ' ' || board[i][j] == word.charAt(k)) && k < length) {
-                    i++;
-                    k++;
+                while (i < m && k < length &&  (board[i][j] == ' ' || board[i][j] == word.charAt(k))) {
                     if (begin == -1) {
                         begin = i;
                     }
                     end = i;
-                    if (k == length - 1) {
+                    if (k == length -1) {
+                        if (begin == 0) {
+                            if (end == m - 1) {
+                                return true;
+                            } else if (board[end + 1][j] == '#') {
+                                return true;
+                            }
 
+                        } else if (board[begin - 1][j] == '#') {
+                            if (end == m - 1) {
+                                return true;
+                            } else if (board[end + 1][j] == '#') {
+                                return true;
+                            }
+
+                        }
                     }
+                    i++;
+                    k++;
                 }
             }
-            if (k == word.length() && end - begin == word.length() - 1) {
-                if (begin == 0) {
-                    if (end == m - 1) {
-                        return true;
-                    } else if (board[end + 1][j] == '#') {
-                        return true;
-                    }
 
-                } else if (board[begin - 1][j] == '#') {
-                    if (end == m - 1) {
-                        return true;
-                    } else if (board[end + 1][j] == '#') {
-                        return true;
-                    }
-
-                }
-
-            }
         }
 
 
