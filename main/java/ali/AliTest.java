@@ -50,18 +50,61 @@ public class AliTest {
 
     }
 
-    public static void main(String[] args) {
-        List<Integer> list = Arrays.asList(2, 3, 1, 2, 4, 3);
+    //public static void main(String[] args) {
+    //    List<Integer> list = Arrays.asList(2, 3, 1, 2, 4, 3);
+    //
+    //    List<Integer> list1 = getLeastList(list, 9);
+    //
+    //    if (!list.isEmpty()) {
+    //        for (Integer integer : list1) {
+    //            System.out.println(integer);
+    //        }
+    //    }
+    //    Semaphore s = new Semaphore(3);
+    //}
 
-        List<Integer> list1 = getLeastList(list, 9);
+    public static int minSubArrayLen(int target, int[] nums) {
+        int length = nums.length;
+        int a = -1;
+        int minSize = Integer.MAX_VALUE;
+        for (int i = 0; i < length; i++) {
+            int left = i;
+            int right = i;
+            int result = 0;
+            int tempSize = -1;
+            while (right < length) {
+                result += nums[right];
+                if (result > target) {
+                    tempSize = right - left + 1;
+                    break;
+                }
+                right++;
 
-        if (!list.isEmpty()) {
-            for (Integer integer : list1) {
-                System.out.println(integer);
             }
+            while (left <= right) {
+                result -= nums[left];
+                if (result < target) {
+                    break;
+                }
+                tempSize--;
+                left++;
+            }
+            if (tempSize >= 1) {
+                minSize = Math.min(minSize, tempSize);
+            }
+
+
         }
-        Semaphore s = new Semaphore(3);
+        return Math.min(0, minSize);
+
+
     }
 
+    public static void main(String[] args) {
+        int a[] = {2, 3, 1, 2, 4, 3};
+        int b = 7;
+        minSubArrayLen(7, a);
+
+    }
 
 }
