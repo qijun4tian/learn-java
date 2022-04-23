@@ -100,11 +100,35 @@ public class AliTest {
 
     }
 
-    public static void main(String[] args) {
-        int a[] = {2, 3, 1, 2, 4, 3};
-        int b = 7;
-        minSubArrayLen(7, a);
 
+    public static int maxRotateFunction(int[] nums) {
+        if (nums.length == 0) {
+            return 0;
+        }
+        int length = nums.length - 1;
+        int max = 0;
+        for (int i = 0; i < nums.length; i++) {
+
+            for (int j = 1; j < nums.length - i; j++) {
+                if (nums[j] < nums[j - 1]) {
+                    int temp = nums[j - 1];
+                    nums[j - 1] = nums[j];
+                    nums[j] = temp;
+                }
+            }
+        }
+        for (int i = 0; i <= length; i++) {
+
+            max = max + i * nums[i];
+        }
+
+
+        return max;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {4, 3, 2, 6};
+        System.out.println(maxRotateFunction(nums));
     }
 
 }
