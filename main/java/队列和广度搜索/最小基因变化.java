@@ -58,5 +58,7 @@ public class 最小基因变化 {
     public static void main(String[] args) {
         String[] s = {"AACCGGTA", "AACCGCTA", "AAACGGTA"};
         minMutation("AACCGGTT", "AAACGGTA", s);
+        String s1 = "111";
+        s1.length();
     }
 }
