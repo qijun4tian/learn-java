@@ -1,14 +1,16 @@
 package search;
 
+import java.util.Arrays;
+
 /**
  * 二分查找
  */
 public class BinarySearch {
 
-    public int search(int a[],int value){
+    public int search(int a[], int value) {
         int start = 0;
         // 必须减1
-        int end = a.length -1;
+        int end = a.length - 1;
         int middle = 0;
         while (start <= end){
             middle = start + (end -start)/2;

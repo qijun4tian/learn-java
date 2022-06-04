@@ -41,16 +41,15 @@ public class 二进制加法 {
         if (j != 0) {
             s.append(j);
         }
-        String s3 = s.toString();
-        StringBuilder s2 = new StringBuilder();
-        for (int i = 0; i < s3.length(); i++) {
-            s2.append(s.charAt(s3.length() - 1 - i));
-        }
-        return s2.toString();
+
+        return s.reverse().toString();
     }
 
     public static void main(String[] args) {
         System.out.println(addBinary("11", "10"));
+        int[] a = new int[10];
+        String s = new String("111");
+
     }
 
 }

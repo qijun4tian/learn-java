@@ -149,4 +149,17 @@ public class 无重复字符的最长子串 {
 
     }
 
+    //public int lengthOfLongestSubstring(String s) {
+    //    int length = 0;
+    //    for (int i = 0; i < s.length(); i++) {
+    //        for (int j = i + 1; j < s.length(); j++) {
+    //            if (s.substring(i, j).contains(String.valueOf(s.charAt(j)))) {
+    //                length = Math.max(length, j - i);
+    //                break;
+    //            }
+    //        }
+    //    }
+    //    return length;
+    //}
+
 }
