@@ -1,11 +1,18 @@
 package 其他;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 /**
  * @author qijun
  * @Description
  * @Date 20:45 2022/5/29
  */
 public class 验证IP地址 {
+    private int[][] rects;
+
     public static String validIPAddress(String queryIP) {
         if (queryIP.length() == 0) {
             return "Neither";
@@ -54,6 +61,25 @@ public class 验证IP地址 {
     }
 
     public static void main(String[] args) {
-        System.out.println(validIPAddress("192.0.0.1"));
+        int[] fraction = Fraction(2, 8);
+
+        System.out.println(fraction);
+
+
+    }
+
+    public static int[] Fraction(int m, int n) {
+        int[] result = new int[2];
+        int temp = Math.min(m, n);
+        result[0] = m;
+        result[1] = n;
+        while (temp >= 2 && result[0] > 1 && result[1] > 1) {
+            if (result[0] % temp == 0 && result[1] % temp == 0) {
+                result[0] = result[0] / temp;
+                result[1] = result[1] / temp;
+            }
+            temp--;
+        }
+        return result;
     }
 }

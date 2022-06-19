@@ -1,13 +1,12 @@
-package tree;
+package 其他;
 
 /**
- * @Author:qijun
+ * @author qijun
  * @Description
- * @Date 23:31 2021/12/24
+ * @Date 9:03 2022/6/19
  */
 public class TreeNode {
-
-    public int val;
+    int val;
     TreeNode left;
 
 
