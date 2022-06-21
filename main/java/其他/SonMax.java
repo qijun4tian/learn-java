@@ -65,14 +65,22 @@ public class SonMax {
     }
 
     public static void main(String[] args) {
-        TreeNode root = new TreeNode(5);
-        TreeNode left = new TreeNode(2);
-        TreeNode right = new TreeNode(-3);
-        root.left = left;
-        root.right = right;
+        //TreeNode root = new TreeNode(5);
+        //TreeNode left = new TreeNode(2);
+        //TreeNode right = new TreeNode(-3);
+        //root.left = left;
+        //root.right = right;
+        //
+        //SonMax sonMax = new SonMax();
+        //sonMax.findFrequentTreeSum(root);
 
-        SonMax sonMax = new SonMax();
-        sonMax.findFrequentTreeSum(root);
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.toArray(new Integer[1]);
+        int[] array = new int[5];
+
+
+
     }
 
 }
