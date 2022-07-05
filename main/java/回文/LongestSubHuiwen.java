@@ -2,8 +2,7 @@ package 回文;
 
 /**
  * @author qijun
- * @Description
- * @Date 22:44 2022/6/21
+ * @date 2022/6/21 19:30
  */
 public class LongestSubHuiwen {
 
@@ -16,7 +15,6 @@ public class LongestSubHuiwen {
             int temp2 = getMaxLength(i,i,s);
             int temp = Math.max(temp1,temp2);
             if(temp > max){
-                max = temp;
 
                 result = s.substring(i - (temp-1)/2,i+ temp/2 + 1);
 
@@ -29,19 +27,17 @@ public class LongestSubHuiwen {
     }
 
     public int getMaxLength(int begin, int end,String s){
-        int temp = 0;
+
         while(begin >=0 && end <= s.length() -1){
             if(s.charAt(begin) == s.charAt(end)){
-                temp = end - begin + 1;
-                begin--;
+                begin--;;
                 end++;
-
             }else {
                 break;
             }
 
         }
-        return temp;
+        return begin + 1  - (end - 1)  + 1;
 
     }
     public static void main(String[] args) {
