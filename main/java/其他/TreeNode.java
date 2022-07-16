@@ -1,19 +1,18 @@
-package tree;
+package 其他;
 
 /**
- * @Author:qijun
+ * @author qijun
  * @Description
- * @Date 23:31 2021/12/24
+ * @Date 9:03 2022/6/19
  */
 public class TreeNode {
+    int val;
+    TreeNode left;
 
-    public int val;
-    public TreeNode left;
 
+    TreeNode right;
 
-    public TreeNode right;
-
-    public TreeNode(int x) {
+    TreeNode(int x) {
         val = x;
     }
 

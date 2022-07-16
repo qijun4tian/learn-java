@@ -143,12 +143,20 @@ public class AliceWord {
         }
     }
 
+    public static Boolean isHuiwen(String s) {
+        for(int i = 0; i <= s.length()/2 -1; i++){
+            if(s.charAt(i) != (s.charAt(s.length() -1 - i))){
+                return false;
+            }
+
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
-        AliceWord aliceWord = new AliceWord();
-
-        String[] words = {"wnlb"};
-        System.out.println(aliceWord.alienOrder(words));
-
+        System.out.println("111");
+        System.out.println(isHuiwen("abccba"));
+        System.out.println(isHuiwen("abba1"));
     }
 
 }
