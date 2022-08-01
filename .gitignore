@@ -1,0 +1,9 @@
+.idea/
+classes/
+.gradle/
+*.iml
+**/rebel*.xml
+*.classes
+**/build
+**/mybatis-gernator.xml
+out
